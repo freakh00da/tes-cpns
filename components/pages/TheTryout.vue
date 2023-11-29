@@ -44,18 +44,14 @@
           </div>
         </div>
       </div>
-      <TheDivider :title="'Beli Tryout'" />
+      <!-- <TheDivider :title="'Beli Tryout'" />
       <div class="w-full">
         <div class="lg:flex flex-row w-full lg:ml-4 justify-start">
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 p-6">
             <the-catalogue :title="'Tryout SKD CPNS Paket 1'" :price="20000" />
-            <the-catalogue :title="'Tryout SKD CPNS Paket 1'" :price="20000" />
-            <the-catalogue :title="'Tryout SKD CPNS Paket 1'" :price="20000" />
-            <the-catalogue :title="'Tryout SKD CPNS Paket 1'" :price="20000" />
-            <the-catalogue :title="'Tryout SKD CPNS Paket 1'" :price="20000" />
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

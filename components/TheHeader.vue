@@ -12,8 +12,8 @@
             </div>
           </nuxt-link>
         </div>
-        <div class="hidden lg:block">
-          <h1 class="text-2xl font-bold">{{ title }}</h1>
+        <div>
+          <h1 class="text-xl lg:text-2xl font-bold">{{ title }}</h1>
         </div>
 
         <div

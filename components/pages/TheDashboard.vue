@@ -2,63 +2,83 @@
   <div class="w-full">
     <section class="bg-white">
       <div class="mx-auto px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-        <div class="max-w-3xl text-start">
-          <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">
-            Welcome to Jago CPNS
-          </h2>
+        <div class="flex flex-col lg:flex-row">
+          <div class="max-w-4xl lg:mr-4 border-2 rounded-xl p-4 text-start">
+            <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">
+              Welcome to Jago CPNS
+            </h2>
 
-          <p class="mt-4 text-gray-500 sm:text-xl">
-            Jago CPNS adalah panduan lengkap untuk sukses dalam tes CPNS. Dengan
-            materi terkini dan latihan intensif, kami siap mempersiapkan Anda
-            secara optimal. Temukan strategi terbaik, latihan soal, dan panduan
-            ahli yang membantu Anda mencapai hasil terbaik. Mulailah persiapan
-            Anda menuju karier sebagai pegawai negeri sipil dengan Jago CPNS.
-          </p>
+            <p class="mt-4 text-gray-500 sm:text-xl">
+              Jago CPNS adalah panduan lengkap untuk sukses dalam tes CPNS.
+              Dengan materi terkini dan latihan intensif, kami siap
+              mempersiapkan Anda secara optimal. Temukan strategi terbaik,
+              latihan soal, dan panduan ahli yang membantu Anda mencapai hasil
+              terbaik. Mulailah persiapan Anda menuju karier sebagai pegawai
+              negeri sipil dengan Jago CPNS.
+            </p>
+            <img
+              src="https://azvyntaelgowdhbadqbs.supabase.co/storage/v1/object/public/ui/logo-extend.png"
+              alt=""
+            />
+          </div>
+          <div class="border-2 rounded-xl mt-6 xl:mt-0 p-4 text-start">
+            <h1 class="text-2xl font-semibold">Total User: {{ userCount }}</h1>
+            <h1 class="text-2xl font-semibold">
+              Tryout Tersedia: {{ tryoutCount }}
+            </h1>
+          </div>
         </div>
-
-        <div class="mt-8 sm:mt-12">
-          <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div
-              class="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center"
-            >
-              <dt class="order-last text-lg font-medium text-gray-500">
-                Saldo
-              </dt>
-
-              <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                Rp 200.000
-              </dd>
-            </div>
-
-            <div
-              class="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center"
-            >
-              <dt class="order-last text-lg font-medium text-gray-500">
-                Tryout Terdaftar
-              </dt>
-
-              <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                2
-              </dd>
-            </div>
-
-            <div
-              class="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center"
-            >
-              <dt class="order-last text-lg font-medium text-gray-500">
-                Total User
-              </dt>
-
-              <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                86.000
-              </dd>
-            </div>
-          </dl>
+        <div class="flex flex-col lg:flex-row">
+          <div
+            class="mt-8 sm:mt-12 p-4 border-2 rounded-xl text-lg font-medium text-gray-500"
+          >
+            <h1 class="mb-2">
+              Bantu kami mengembangkan website ini melalui QRIS dibawah ini atau
+              melalui
+              <a
+                class="text-blue-500 underline"
+                href="https://saweria.co/khaqulhudaa"
+                >saweria</a
+              >
+            </h1>
+            <img
+              class="h-40 w-40"
+              src="https://azvyntaelgowdhbadqbs.supabase.co/storage/v1/object/public/ui/qris?t=2023-11-29T08%3A25%3A58.743Z"
+              alt=""
+            />
+          </div>
+          <div
+            class="mt-8 lg:ml-4 sm:mt-12 p-4 border-2 rounded-xl text-lg font-medium text-gray-500"
+          >
+            <h1 class="mb-2">Contact Us</h1>
+            <h2>
+              Grup Diskusi Telegram :
+              <a
+                class="text-blue-500 underline"
+                href="https://t.me/JagoCpnsTryout"
+                >telegram group</a
+              >
+            </h2>
+            <h2>
+              Informasi & Aduan :
+              <a class="text-blue-500 underline" href="https://t.me/jagocpnsto"
+                >telegram channel</a
+              >
+            </h2>
+            <h2>
+              Kontak Developer:
+              <a
+                href="https://wa.me/62895621576020"
+                class="text-blue-500 underline"
+                >laporkan bug</a
+              >
+            </h2>
+          </div>
         </div>
       </div>
     </section>
-    <TheDivider :title="'News'" />
-    <the-news />
+    <!-- <TheDivider :title="'News'" />
+    <the-news /> -->
   </div>
 </template>
 <script>
@@ -66,6 +86,38 @@ import TheDivider from '../TheDivider.vue'
 export default {
   components: {
     TheDivider,
+  },
+  data() {
+    return {
+      userCount: 0,
+      tryoutCount: 0,
+    }
+  },
+  methods: {
+    async countUsers() {
+      let { data, error } = await this.$supabase.from('users').select('name')
+      if (error) {
+        console.error('Error fetching counter:', error)
+        return null
+      }
+      const totalUser = data.length
+      this.userCount = totalUser
+    },
+    async countTryout() {
+      let { data, error } = await this.$supabase
+        .from('tryout-list')
+        .select('id')
+      if (error) {
+        console.error('Error fetching counter:', error)
+        return null
+      }
+      const totalData = data.length
+      this.tryoutCount = totalData
+    },
+  },
+  async mounted() {
+    await this.countUsers()
+    await this.countTryout()
   },
 }
 </script>
