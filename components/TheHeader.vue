@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-gray-50 h-fit fixed top-0 left-0 right-0">
+  <header class="bg-gray-50 h-fit fixed top-0 left-0 right-0 z-10">
     <div class="mx-auto max-w-screen-xl px-4 py-5 sm:px-6 lg:px-8">
       <div class="flex items-center justify-center sm:justify-between sm:gap-4">
         <div class="block lg:hidden mr-4">

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container my-10 w-full lg:w-3/4 mx-auto px-20 py-8 bg-gray-50 lg:shadow-xl"
+    class="container my-10 w-full lg:w-3/4 mx-auto px-4 lg:px-20 py-8 bg-gray-50 lg:shadow-xl"
   >
     <div class="my-4">
       <nuxt-link to="/" class="font-semibold text-blue-500 hover:underline"
@@ -66,6 +66,27 @@ export default {
     }
   },
   methods: {
+    async postScore() {
+      try {
+        const idToUpdate = localStorage.getItem('user_id')
+        const tryoutTitle = `${this.$route.params.id}_score`
+
+        const score = {}
+        score[tryoutTitle] = this.calculateScore
+
+        const { data, error } = await this.$supabase
+          .from('users')
+          .update(score)
+          .eq('id', idToUpdate)
+
+        if (error) {
+          throw error
+        }
+      } catch (err) {
+        console.error('Error fetching questions:', err.message)
+        throw err
+      }
+    },
     async fetchQuestions() {
       try {
         const { data, error } = await this.$supabase
@@ -106,6 +127,7 @@ export default {
   async mounted() {
     await this.fetchQuestions()
     await this.getUserAnswers()
+    await this.postScore()
   },
   computed: {
     calculateScore() {

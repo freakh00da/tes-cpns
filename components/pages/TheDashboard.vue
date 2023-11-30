@@ -116,6 +116,7 @@ export default {
     },
   },
   async mounted() {
+    this.$emit('dashboard-mounted')
     await this.countUsers()
     await this.countTryout()
   },

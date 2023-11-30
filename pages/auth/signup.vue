@@ -208,12 +208,25 @@
         </div>
       </main>
     </div>
+    <succeed-alert
+      v-if="showAlert"
+      class="fixed top-3 left-3 lg:left-3/4 right-3"
+      :title="'Berhasil'"
+      :description="'Anda akan diarahkan ke login'"
+    />
+    <error-alert
+      v-if="showError"
+      :title="'Gagal Registrasi'"
+      :description="'Error'"
+    />
   </section>
 </template>
 <script>
 export default {
   data() {
     return {
+      showError: false,
+      showAlert: false,
       email: '',
       password: '',
       passwordConfirmation: '',
@@ -234,6 +247,7 @@ export default {
         })
 
         if (error) {
+          this.showError = true
           console.error('Error signing up:', error.message)
           return
         }
@@ -249,9 +263,11 @@ export default {
           ])
 
         if (insertError) {
+          this.showError = true
           console.error('Error inserting user:', insertError.message)
           return
         }
+        this.showAlert = true
         setTimeout(() => {
           this.$router.push('/auth/signin')
         }, 3000)

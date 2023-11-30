@@ -64,22 +64,12 @@ export default {
       components: {
         TheDivider,
       },
-      tryouts: [],
     }
   },
+  props: {
+    tryouts: Array,
+  },
   methods: {
-    async getTryoutList() {
-      let { data, error } = await this.$supabase.from('tryout-list').select('*')
-      const formattedTryouts = data.map((item) => {
-        return {
-          title: item.title,
-          date: item.date,
-          type: item.type,
-          url: item.url,
-        }
-      })
-      this.tryouts = formattedTryouts
-    },
     handleSelect(url) {
       const formatUrl = `/tryout/${url}`
       this.$router.push(formatUrl)
@@ -88,8 +78,8 @@ export default {
       this.$router.push(this.tryouts.url)
     },
   },
-  async mounted() {
-    await this.getTryoutList()
+  mounted() {
+    this.$emit('tryout-mounted')
   },
 }
 </script>

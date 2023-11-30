@@ -1,6 +1,7 @@
 <template>
   <div class="h-screen w-screen overflow-x-hidden lg:flex justify-end">
     <the-sidebar
+      :active="currentContent"
       @showContent="updateContent"
       :username="username"
       :useremail="useremail"
@@ -15,8 +16,19 @@
       :useremail="useremail"
       class="fixed top-0 left-0 right-0"
     />
-    <div class="lg:flex lg:w-5/6 justify-center my-8">
+    <div
+      class="lg:flex lg:w-5/6 justify-center my-8"
+      :class="{
+        'animate-slideInFromBottom': showContent === true,
+      }"
+    >
       <component
+        :tryouts="tryouts"
+        @dashboard-mounted="updateTransition"
+        @tryout-mounted="updateTransition"
+        @profile-mounted="updateTransition"
+        @rank-mounted="updateTransition"
+        @score-mounted="updateTransition"
         :username="username"
         :useremail="useremail"
         :is="currentContent"
@@ -48,9 +60,17 @@ export default {
       useremail: '',
       showSidebar: true,
       currentContent: 'TheDashboard',
+      showContent: false,
+      tryouts: [],
     }
   },
   methods: {
+    updateTransition() {
+      this.showContent = true
+      setTimeout(() => {
+        this.showContent = false
+      }, 600)
+    },
     async fetchUser() {
       const userId = localStorage.getItem('user_id')
       const { data, error } = await this.$supabase
@@ -66,6 +86,18 @@ export default {
       this.username = data.name
       this.useremail = data.email
     },
+    async getTryoutList() {
+      let { data, error } = await this.$supabase.from('tryout-list').select('*')
+      const formattedTryouts = data.map((item) => {
+        return {
+          title: item.title,
+          date: item.date,
+          type: item.type,
+          url: item.url,
+        }
+      })
+      this.tryouts = formattedTryouts
+    },
     handleProfile() {
       this.currentContent = 'TheProfile'
     },
@@ -78,6 +110,7 @@ export default {
   },
   async mounted() {
     await this.fetchUser()
+    await this.getTryoutList()
   },
   computed: {
     titleContent() {
@@ -102,4 +135,34 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideInFromLeft {
+  animation: slideInFromLeft 0.5s ease-in-out;
+}
+
+.animate-slideInFromBottom {
+  animation: slideInFromBottom 0.5s ease-in-out;
+}
+</style>

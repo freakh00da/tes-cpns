@@ -38,7 +38,7 @@
                 @click="handleSelect(item.url)"
                 class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               >
-                lihat
+                lihat nilai
               </button>
             </div>
           </div>
@@ -56,29 +56,19 @@ export default {
       components: {
         TheDivider,
       },
-      tryouts: [],
     }
   },
+  props: {
+    tryouts: Array,
+  },
   methods: {
-    async getTryoutList() {
-      let { data, error } = await this.$supabase.from('tryout-list').select('*')
-      const formattedTryouts = data.map((item) => {
-        return {
-          title: item.title,
-          date: item.date,
-          type: item.type,
-          url: item.url,
-        }
-      })
-      this.tryouts = formattedTryouts
-    },
     handleSelect(url) {
       const formatUrl = `score/${url}`
       this.$router.push(formatUrl)
     },
   },
-  async mounted() {
-    await this.getTryoutList()
+  mounted() {
+    this.$emit('score-mounted')
   },
 }
 </script>

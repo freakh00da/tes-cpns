@@ -109,6 +109,16 @@ export default {
       showModal: false,
     }
   },
+  props: {
+    timesup: Boolean,
+  },
+  watch: {
+    timesup(newVal) {
+      if (newVal) {
+        this.handleConfirm()
+      }
+    },
+  },
   methods: {
     async fetchQuestions() {
       try {

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+    <div class="mx-auto max-w-screen-xl px-4 pt-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center sm:justify-between">
         <div class="text-center sm:text-left">
           <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -44,6 +44,7 @@ export default {
         if (timeInSeconds < 0) {
           clearInterval(countdown)
           this.timeLeft = 'Waktu sudah habis!'
+          this.$emit('times-up')
           localStorage.removeItem('countdownStartTime') // Hapus waktu yang tersimpan setelah selesai
         }
       }, 1000)

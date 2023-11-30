@@ -15,7 +15,8 @@
         <li>
           <button
             @click="showHome"
-            class="flex w-full px-4 py-2 text-lg font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+            class="flex w-full px-4 py-2 text-lg font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+            :class="{ 'bg-gray-200': active === 'TheDashboard' }"
           >
             <span class="mr-2">
               <svg
@@ -39,7 +40,8 @@
         <li>
           <button
             @click="showTryout"
-            class="flex w-full px-4 py-2 text-lg font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+            class="flex w-full px-4 py-2 text-lg font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+            :class="{ 'bg-gray-200': active === 'TheTryout' }"
           >
             <span class="mr-2">
               <svg
@@ -62,7 +64,8 @@
         <li>
           <button
             @click="showNilai"
-            class="flex w-full px-4 py-2 text-lg font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+            class="flex w-full px-4 py-2 text-lg font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+            :class="{ 'bg-gray-200': active === 'TheScore' }"
           >
             <span class="mr-2">
               <svg
@@ -88,7 +91,8 @@
         <li>
           <button
             @click="showRank"
-            class="flex w-full px-4 py-2 text-lg font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+            class="flex w-full px-4 py-2 text-lg font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+            :class="{ 'bg-gray-200': active === 'TheRank' }"
           >
             <span class="mr-2">
               <svg
@@ -138,6 +142,7 @@ export default {
   props: {
     username: String,
     useremail: String,
+    active: String,
   },
   methods: {
     showHome() {

@@ -43,5 +43,8 @@ export default {
     username: String,
     useremail: String,
   },
+  mounted() {
+    this.$emit('profile-mounted')
+  },
 }
 </script>

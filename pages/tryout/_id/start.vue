@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tryout-tools />
+    <tryout-tools @times-up="handleTimes" />
     <succeed-alert
       class="fixed bottom-3 left-3 right-3"
       @close-clicked="handleClose"
@@ -8,9 +8,9 @@
       :description="'anda akan dialihkan ke dashboard'"
       v-if="showSucceed"
     />
-    <div class="container mx-auto p-4">
+    <div class="container mx-auto px-4 py-2">
       <div class="bg-slate-50 rounded-lg shadow p-6">
-        <exam-page @confirm-clicked="handleAlert" />
+        <exam-page :timesup="timesup" @confirm-clicked="handleAlert" />
       </div>
     </div>
   </div>
@@ -19,12 +19,15 @@
 <script>
 export default {
   data() {
-    return { showSucceed: false }
+    return { showSucceed: false, timesup: false }
   },
   mounted() {
     window.addEventListener('beforeunload', this.confirmRefresh)
   },
   methods: {
+    handleTimes() {
+      this.timesup = true
+    },
     async fetchQuestion() {
       let { data: questions, error } = await supabase
         .from('questions')

@@ -1,5 +1,10 @@
 <template>
   <section class="bg-white">
+    <error-alert
+      v-if="errorAlert"
+      :title="'Login Gagal!'"
+      :description="'Email/Password yang anda masukan salah'"
+    />
     <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
       <section
         class="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6"
@@ -161,6 +166,7 @@
 export default {
   data() {
     return {
+      errorAlert: false,
       email: '',
       password: '',
     }
@@ -175,6 +181,7 @@ export default {
         })
 
         if (error) {
+          this.errorAlert = true
           console.error('Error signing in:', error.message)
         } else {
           localStorage.setItem('user', data.session.user.aud)
