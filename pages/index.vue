@@ -6,7 +6,7 @@
       :username="username"
       :useremail="useremail"
       v-if="showSidebar"
-      class="fixed z-20 left-0 hidden lg:block"
+      class="fixed z-20 left-0 hidden lg:block animate-slideInFromLeft"
     />
     <the-header
       @profile-clicked="handleProfile"
@@ -29,6 +29,8 @@
         @profile-mounted="updateTransition"
         @rank-mounted="updateTransition"
         @score-mounted="updateTransition"
+        :usercity="usercity"
+        :userphone="userphone"
         :username="username"
         :useremail="useremail"
         :is="currentContent"
@@ -56,6 +58,8 @@ export default {
   },
   data() {
     return {
+      userphone: '',
+      usercity: '',
       username: '',
       useremail: '',
       showSidebar: true,
@@ -83,6 +87,9 @@ export default {
         console.error('Error fetching user:', error)
         return null
       }
+
+      this.usercity = data.city
+      this.userphone = data.phone
       this.username = data.name
       this.useremail = data.email
     },

@@ -125,6 +125,46 @@
                 v-model="email"
               />
             </div>
+            <div class="col-span-6">
+              <label for="City" class="block text-sm font-medium text-gray-700">
+                Kota
+              </label>
+              <input
+                type="text"
+                list="cities"
+                id="city"
+                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm border"
+                placeholder="Kota Anda"
+                v-model="cityInput"
+                @change="fetchCity"
+              />
+              <datalist name="cities" id="cities">
+                <option
+                  v-for="city in cities"
+                  :key="city"
+                  :value="city.regency"
+                >
+                  {{ city.regency }}
+                </option>
+              </datalist>
+            </div>
+            <div class="col-span-6">
+              <label
+                for="Phone"
+                class="block text-sm font-medium text-gray-700"
+              >
+                No HP
+              </label>
+
+              <input
+                type="tel"
+                id="Phone"
+                name="phone"
+                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm border"
+                placeholder="08xxx"
+                v-model="phone"
+              />
+            </div>
 
             <div class="col-span-6 sm:col-span-3">
               <label
@@ -225,6 +265,9 @@
 export default {
   data() {
     return {
+      cityInput: '',
+      phone: '',
+      cities: [],
       showError: false,
       showAlert: false,
       email: '',
@@ -235,6 +278,18 @@ export default {
     }
   },
   methods: {
+    async fetchCity() {
+      const city = this.cityInput
+      console.log(city)
+      this.$axios
+        .get(
+          `https://api.wilayah-nusantara.id/kabupaten?name=${this.cityInput}`
+        )
+        .then(function (response) {
+          console.log(response.data.data)
+          this.cities = response.data.data
+        })
+    },
     async registerUser() {
       const password = this.passwordValidator(
         this.password,
@@ -259,6 +314,8 @@ export default {
               name: this.firstName + ' ' + this.lastName,
               email: this.email,
               id: data.user.id,
+              city: this.city,
+              phone: this.phone,
             },
           ])
 

@@ -1,12 +1,12 @@
 <template>
   <div class="w-full">
     <div class="w-full py-16">
-      <div class="lg:flex flex-row w-full lg:ml-4 justify-start">
-        <div class="grid grid-cols lg:grid-cols-4 gap-4 p-6">
+      <div class="lg:flex flex-row w-full justify-start">
+        <div class="grid grid-cols lg:grid-cols-4 gap-6 p-6">
           <div
             v-for="(item, index) in tryouts"
             :key="index"
-            class="bg-gray-200 lg:w-4/6 p-4 shadow-md rounded-md"
+            class="border lg:w-4/6 p-4 shadow-md rounded-md"
           >
             <div class="flex flex-row items-center justify-between">
               <div class="flex items-center">
@@ -62,6 +62,7 @@ export default {
     tryouts: Array,
   },
   methods: {
+    isTryout() {},
     handleSelect(url) {
       const formatUrl = `score/${url}`
       this.$router.push(formatUrl)

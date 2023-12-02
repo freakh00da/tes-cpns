@@ -1,20 +1,21 @@
 <template>
   <div>
-    <!--
-  Heads up! 👋
-
-  Plugins:
-    - @tailwindcss/forms
--->
-
+    <error-alert
+      v-if="showAlert"
+      class="transform transition duration-500"
+      :class="{
+        'opacity-0 -translate-y-full': !showAlert,
+      }"
+      :title="'PERHATIAN!'"
+      :description="'Jika nama anda tidak muncul di dalam list,silahkan lihat nilai anda dahulu pada page nilai agar nilai di-generate oleh sistem'"
+    />
     <header class="bg-gray-200">
-      <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-center">
-          <div class="flex items-center gap-4">
-            <a class="text-blue-500 font-semibold underline" href="/"
-              >kembali ke home</a
-            >
-            <!-- <div class="relative">
+      <div class="flex justify-between max-w-screen-xl py-8 sm:px-6">
+        <a class="px-3 text-blue-500 font-semibold underline" href="/"
+          >go back</a
+        >
+        <h1 class="lg:text-xl font-semibold">{{ title }}</h1>
+        <!-- <div class="relative">
               <label class="sr-only" for="search"> Search </label>
 
               <input
@@ -47,11 +48,9 @@
                 </svg>
               </button>
             </div> -->
-          </div>
-        </div>
       </div>
     </header>
-    <div class="overflow-x-auto mt-4">
+    <div class="overflow-x-auto mt-4 mx-8">
       <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
         <thead class="text-left">
           <tr>
@@ -69,7 +68,7 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-gray-200">
           <tr v-for="(user, index) in users" :key="index">
             <td class="whitespace-nowrap px-4 py-2">{{ index + 1 }}</td>
             <td class="whitespace-nowrap px-4 py-2">{{ user.name }}</td>
@@ -87,6 +86,8 @@
 export default {
   data() {
     return {
+      title: this.$route.params.id,
+      showAlert: true,
       userAnswers: [],
       answers: [],
       users: [],
@@ -103,7 +104,9 @@ export default {
         console.error('Error fetching user:', error)
         return null
       }
-      this.users = data
+      const id = `${this.$route.params.id}_score`
+      const filteredData = data.filter((item) => item[id] !== null)
+      this.users = filteredData
       const tryout = this.$route.params.id
       const userAnswers = data.map((item) => item[tryout])
       this.userAnswers = userAnswers
@@ -133,11 +136,25 @@ export default {
         user.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       )
     },
+    hideAlert() {
+      setTimeout(() => {
+        this.showAlert = false
+      }, 10000)
+    },
   },
   async mounted() {
+    this.hideAlert()
     await this.fetchUser()
     this.sortUsersByScore()
     console.log(this.users)
   },
 }
 </script>
+<style>
+.transform.opacity-100 {
+  opacity: 1;
+}
+.transform.translate-y-0 {
+  transform: translateY(0);
+}
+</style>

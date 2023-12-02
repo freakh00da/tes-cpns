@@ -1,13 +1,18 @@
 <template>
   <header>
-    <div class="mx-auto max-w-screen-xl px-4 pt-4 sm:px-6 lg:px-8">
-      <div class="sm:flex sm:items-center sm:justify-between">
-        <div class="text-center sm:text-left">
-          <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">
+    <div class="w-screen-xl pt-4">
+      <div class="flex w-screen flex-row justify-start">
+        <div class="px-4">
+          <img
+            class="h-20 lg:h-24"
+            src="https://azvyntaelgowdhbadqbs.supabase.co/storage/v1/object/public/ui/logo-extend.png"
+            alt=""
+          />
+        </div>
+        <div class="text-center pl-9 pt-6">
+          <h1 class="text-lg lg:text-2xl font-bold text-gray-900 sm:text-3xl">
             {{ timeLeft }}
           </h1>
-
-          <p class="mt-1.5 text-lg text-gray-500">Selamat Mengerjakan!</p>
         </div>
 
         <div

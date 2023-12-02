@@ -12,13 +12,13 @@
       }"
     />
     <div class="flex flex-col md:flex-row">
-      <div class="w-full md:w-3/4 p-4 md:border-r">
+      <div class="w-full md:w-3/4 p-4 md:border-r-2 border-black">
         <div v-if="currentQuestion !== null" class="mb-6 w-">
           <h2 class="font-bold text-lg mb-2">Soal {{ currentQuestion + 1 }}</h2>
           <!-- <div>
             <img src="https://placehold.co/600x400" alt="" />
           </div> -->
-          <p class="text-lg">
+          <p class="text-2xl">
             {{ questions[currentQuestion].question }}
           </p>
           <br />
@@ -34,7 +34,7 @@
                   'bg-green-500 text-white': selectedAnswer === choice.key,
                   'bg-slate-200': selectedAnswer !== choice.key,
                 }"
-                class="text-start flex items-center px-2 py-1 rounded text-lg my-2"
+                class="text-start flex items-center px-2 py-1 rounded text-xl my-2"
                 @click="updateSelectedAnswer(choice.key)"
               >
                 {{ choice.key }}.
@@ -75,10 +75,10 @@
         </div>
       </div>
 
-      <div class="w-full md:w-1/4 p-4">
+      <div class="w-full md:w-1/4 p-4 border ml-2">
         <h3 class="hidden md:block font-bold text-lg mb-4">Navigasi Soal</h3>
         <div
-          class="flex overflow-x-auto flex-row md:grid md:grid-cols-2 lg:grid-cols-4 gap-3"
+          class="flex overflow-auto h-1/2 flex-row md:grid md:grid-cols-2 lg:grid-cols-4 gap-3"
         >
           <div
             v-for="(question, index) in questions"
@@ -87,7 +87,8 @@
             @click="handleNavigate(index)"
             :class="{
               'bg-blue-500 text-white': currentQuestion === index,
-              'bg-green-500 text-white': answers[index] !== 'x',
+              'bg-green-500 text-white':
+                answers[index] !== 'x' && currentQuestion !== index,
             }"
           >
             {{ index + 1 }}

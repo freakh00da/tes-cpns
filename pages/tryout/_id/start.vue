@@ -1,15 +1,16 @@
 <template>
   <div>
-    <tryout-tools @times-up="handleTimes" />
-    <succeed-alert
-      class="fixed bottom-3 left-3 right-3"
-      @close-clicked="handleClose"
-      :title="'Jawaban berhasil di-submit'"
-      :description="'anda akan dialihkan ke dashboard'"
-      v-if="showSucceed"
-    />
-    <div class="container mx-auto px-4 py-2">
-      <div class="bg-slate-50 rounded-lg shadow p-6">
+    <div class="max-h-screen lg:overflow-hidden">
+      <tryout-tools @times-up="handleTimes" />
+      <succeed-alert
+        class="fixed bottom-3 left-3 right-3"
+        @close-clicked="handleClose"
+        :title="'Jawaban berhasil di-submit'"
+        :description="'anda akan dialihkan ke dashboard'"
+        v-if="showSucceed"
+      />
+
+      <div class="h-fit rounded-lg shadow p-4 lg:p-14">
         <exam-page :timesup="timesup" @confirm-clicked="handleAlert" />
       </div>
     </div>
@@ -27,11 +28,6 @@ export default {
   methods: {
     handleTimes() {
       this.timesup = true
-    },
-    async fetchQuestion() {
-      let { data: questions, error } = await supabase
-        .from('questions')
-        .select('*')
     },
     handleAlert() {
       this.showSucceed = true

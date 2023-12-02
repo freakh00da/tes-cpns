@@ -33,13 +33,7 @@
             class="mt-8 sm:mt-12 p-4 border-2 rounded-xl text-lg font-medium text-gray-500"
           >
             <h1 class="mb-2">
-              Bantu kami mengembangkan website ini melalui QRIS dibawah ini atau
-              melalui
-              <a
-                class="text-blue-500 underline"
-                href="https://saweria.co/khaqulhudaa"
-                >saweria</a
-              >
+              Bantu kami mengembangkan website ini melalui QRIS dibawah ini
             </h1>
             <img
               class="h-40 w-40"
@@ -63,14 +57,6 @@
               Informasi & Aduan :
               <a class="text-blue-500 underline" href="https://t.me/jagocpnsto"
                 >telegram channel</a
-              >
-            </h2>
-            <h2>
-              Kontak Developer:
-              <a
-                href="https://wa.me/62895621576020"
-                class="text-blue-500 underline"
-                >laporkan bug</a
               >
             </h2>
           </div>
@@ -101,7 +87,7 @@ export default {
         return null
       }
       const totalUser = data.length
-      this.userCount = totalUser
+      this.userCount = totalUser + 543
     },
     async countTryout() {
       let { data, error } = await this.$supabase
