@@ -26,7 +26,7 @@
 export default {
   data() {
     return {
-      timeLeft: '2 jam 0 menit 0 detik',
+      timeLeft: '1 jam 40 menit 0 detik',
     }
   },
   methods: {
@@ -35,7 +35,7 @@ export default {
         ? Math.floor(
             (localStorage.getItem('countdownStartTime') - Date.now()) / 1000
           )
-        : 2 * 60 * 60
+        : 6000
 
       const countdown = setInterval(() => {
         const hours = Math.floor(timeInSeconds / 3600)
