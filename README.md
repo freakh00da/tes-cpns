@@ -1,6 +1,6 @@
-# tes-cpns
+# Jago CPNS
 
-## Build Setup
+## Tryout CPNS Terbaik
 
 ```bash
 # install dependencies
