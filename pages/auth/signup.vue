@@ -193,6 +193,7 @@
               </label>
 
               <input
+                @change="passwordValidator"
                 type="password"
                 id="PasswordConfirmation"
                 name="password_confirmation"
@@ -259,6 +260,11 @@
       :title="'Gagal Registrasi'"
       :description="'Error'"
     />
+    <error-alert
+      v-if="!isMatch"
+      :title="'Password Salah'"
+      :description="'Password yang anda masukan tidak sama'"
+    />
   </section>
 </template>
 <script>
@@ -275,6 +281,7 @@ export default {
       passwordConfirmation: '',
       firstName: '',
       lastName: '',
+      isMatch: true,
     }
   },
   methods: {
@@ -334,6 +341,7 @@ export default {
     },
     passwordValidator(password, passwordConfirmation) {
       if (password !== passwordConfirmation) {
+        this.isMatch = false
         return null
       }
       return password
