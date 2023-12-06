@@ -95,6 +95,7 @@ export default {
     async handleSubmit(data) {
       const passToken = await this.getCode()
       if (passToken === data) {
+        localStorage.setItem('token', data)
         const formatUrl = `/tryout/${this.selectedData}`
         this.$router.push(formatUrl)
       } else {

@@ -66,6 +66,7 @@
 
       <nuxt-link to="/"
         ><button
+          @click="handleCancel"
           class="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
         >
           Cancel
@@ -84,6 +85,9 @@ export default {
     }
   },
   methods: {
+    handleCancel() {
+      localStorage.removeItem('token')
+    },
     handleAccept() {
       localStorage.removeItem('currentQuestion')
       localStorage.removeItem('answers')
