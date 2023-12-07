@@ -6,6 +6,10 @@
     <h2 class="text-2xl text-red-500 font-bold my-4">
       Soal hanya bisa dikerjakan satu kali setelah klik setuju & mulai
     </h2>
+    <div class="border border-black p-4 rounded max-w-fit">
+      <h2 class="text-xl">Jumlah Soal : 100 soal</h2>
+      <h2 class="text-xl">Waktu : 1 Jam 40 Menit</h2>
+    </div>
     <ol>
       <li class="py-2">
         <strong>1. Bagian Soal</strong>

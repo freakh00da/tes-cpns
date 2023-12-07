@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="max-h-screen lg:overflow-hidden">
+    <div class="max-h-screen">
       <tryout-tools @times-up="handleTimes" />
       <succeed-alert
         class="fixed bottom-3 left-3 right-3"
