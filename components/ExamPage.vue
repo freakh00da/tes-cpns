@@ -78,7 +78,7 @@
       <div class="w-full md:w-1/4 p-4 border ml-2">
         <h3 class="hidden md:block font-bold text-lg mb-4">Navigasi Soal</h3>
         <div
-          class="flex overflow-auto h-1/2 flex-row md:grid md:grid-cols-2 lg:grid-cols-5 overflow-x-hidden p-2 gap-3"
+          class="flex overflow-auto h-1/2 flex-row md:grid md:grid-cols-2 lg:grid-cols-5 overflow-x-hidden px-2 pb-12 gap-3"
         >
           <div
             v-for="(question, index) in questions"
