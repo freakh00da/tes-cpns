@@ -3,6 +3,9 @@
     class="container my-10 w-fit mx-auto px-4 lg:px-20 py-8 bg-gray-50 lg:shadow-xl"
   >
     <h2 class="text-2xl font-bold my-4">Petunjuk Menjalankan Latihan Tes</h2>
+    <h2 class="text-2xl text-red-500 font-bold my-4">
+      Soal hanya bisa dikerjakan satu kali setelah klik setuju & mulai
+    </h2>
     <ol>
       <li class="py-2">
         <strong>1. Bagian Soal</strong>
