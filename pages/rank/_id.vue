@@ -74,7 +74,7 @@
             <td class="whitespace-nowrap px-4 py-2">{{ user.name }}</td>
             <td class="whitespace-nowrap px-4 py-2">{{ user.city }}</td>
             <td class="whitespace-nowrap px-4 py-2">
-              {{ getUserScore(user) }}
+              {{ getUserScore(user) * 5 }}
             </td>
           </tr>
         </tbody>

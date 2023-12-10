@@ -50,12 +50,11 @@
             </h1>
 
             <p class="mt-4 leading-relaxed text-gray-500">
-              Jago CPNS adalah panduan lengkap untuk sukses dalam tes CPNS.
-              Dengan materi terkini dan latihan intensif, kami siap
-              mempersiapkan Anda secara optimal. Temukan strategi terbaik,
-              latihan soal, dan panduan ahli yang membantu Anda mencapai hasil
-              terbaik. Mulailah persiapan Anda menuju karier sebagai pegawai
-              negeri sipil dengan Jago CPNS.
+              Jago CPNS adalah Website Layanan belajar dan tryout CPNS untuk
+              persiapan tes CPNS. di Jago Cpns Juga tersedia informasi, materi,
+              soal dan tryout Online CPNS Untuk mempersiapkan diri dalam
+              menghadapi Seleksi CPNS. Soal soal dirancang oleh Tim Khusus Yang
+              disesuaikan Dengan Kisi Kisi terbaru
             </p>
           </div>
 
@@ -136,7 +135,6 @@
                 class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm border"
                 placeholder="Kota Anda"
                 v-model="cityInput"
-                @change="fetchCity"
               />
               <datalist name="cities" id="cities">
                 <option
@@ -273,7 +271,6 @@ export default {
     return {
       cityInput: '',
       phone: '',
-      cities: [],
       showError: false,
       showAlert: false,
       email: '',
@@ -285,18 +282,6 @@ export default {
     }
   },
   methods: {
-    async fetchCity() {
-      const city = this.cityInput
-      console.log(city)
-      this.$axios
-        .get(
-          `https://api.wilayah-nusantara.id/kabupaten?name=${this.cityInput}`
-        )
-        .then(function (response) {
-          console.log(response.data.data)
-          this.cities = response.data.data
-        })
-    },
     async registerUser() {
       const password = this.passwordValidator(
         this.password,
@@ -321,7 +306,7 @@ export default {
               name: this.firstName + ' ' + this.lastName,
               email: this.email,
               id: data.user.id,
-              city: this.city,
+              city: this.cityInput,
               phone: this.phone,
             },
           ])

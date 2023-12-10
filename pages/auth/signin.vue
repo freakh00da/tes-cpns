@@ -55,12 +55,11 @@
             </h1>
 
             <p class="mt-4 leading-relaxed text-gray-500">
-              Jago CPNS adalah panduan lengkap untuk sukses dalam tes CPNS.
-              Dengan materi terkini dan latihan intensif, kami siap
-              mempersiapkan Anda secara optimal. Temukan strategi terbaik,
-              latihan soal, dan panduan ahli yang membantu Anda mencapai hasil
-              terbaik. Mulailah persiapan Anda menuju karier sebagai pegawai
-              negeri sipil dengan Jago CPNS.
+              Jago CPNS adalah Website Layanan belajar dan tryout CPNS untuk
+              persiapan tes CPNS. di Jago Cpns Juga tersedia informasi, materi,
+              soal dan tryout Online CPNS Untuk mempersiapkan diri dalam
+              menghadapi Seleksi CPNS. Soal soal dirancang oleh Tim Khusus Yang
+              disesuaikan Dengan Kisi Kisi terbaru
             </p>
           </div>
           <div class="hidden lg:block mx-auto max-w-lg text-center">
