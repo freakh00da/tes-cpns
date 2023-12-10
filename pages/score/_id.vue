@@ -27,7 +27,7 @@
       >
         <div class="text-center py-3 border rounded h-24 w-24 p-2 mx-4">
           <h1 class="text-3xl lg:text-5xl font-semibold">
-            {{ calculateScore }}
+            {{ calculateScore * 5 }}
           </h1>
           <p
             class="font-semibold"

@@ -1,17 +1,20 @@
 <template>
   <div>
-    <div class="max-h-screen lg:overflow-hidden">
-      <tryout-tools @times-up="handleTimes" />
+    <div>
       <succeed-alert
-        class="fixed bottom-3 left-3 right-3"
+        class="fixed bottom-3 left-3 right-3 z-20"
         @close-clicked="handleClose"
         :title="'Jawaban berhasil di-submit'"
         :description="'anda akan dialihkan ke dashboard'"
         v-if="showSucceed"
       />
 
-      <div class="h-fit rounded-lg shadow p-4 lg:p-14">
-        <exam-page :timesup="timesup" @confirm-clicked="handleAlert" />
+      <div class="">
+        <exam-page
+          @times-up="handleTimes"
+          :timesup="timesup"
+          @confirm-clicked="handleAlert"
+        />
       </div>
     </div>
   </div>
