@@ -130,21 +130,11 @@
               </label>
               <input
                 type="text"
-                list="cities"
                 id="city"
                 class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm border"
                 placeholder="Kota Anda"
                 v-model="cityInput"
               />
-              <datalist name="cities" id="cities">
-                <option
-                  v-for="city in cities"
-                  :key="city"
-                  :value="city.regency"
-                >
-                  {{ city.regency }}
-                </option>
-              </datalist>
             </div>
             <div class="col-span-6">
               <label
