@@ -24,10 +24,11 @@
             type="search"
             placeholder="Cari nama anda"
             v-model="searchQuery"
+            @change="handleSearch"
           />
 
           <button
-            @click="fetchUser"
+            @click="handleSearch"
             type="button"
             class="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-gray-50 p-2 text-gray-600 transition hover:text-gray-700"
           >
@@ -131,6 +132,10 @@ export default {
       setTimeout(() => {
         this.showAlert = false
       }, 10000)
+    },
+    async handleSearch() {
+      await this.fetchUser()
+      this.sortUsersByScore()
     },
   },
   async mounted() {

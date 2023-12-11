@@ -62,6 +62,13 @@
               disesuaikan Dengan Kisi Kisi terbaru
             </p>
           </div>
+          <div class="my-6">
+            <img
+              src="https://azvyntaelgowdhbadqbs.supabase.co/storage/v1/object/public/ui/logo-extend.png"
+              alt="logo"
+              class="w-auto h-20 mx-auto"
+            />
+          </div>
           <div class="hidden lg:block mx-auto max-w-lg text-center">
             <h1 class="font-bold sm:text-3xl">Sign in</h1>
           </div>
