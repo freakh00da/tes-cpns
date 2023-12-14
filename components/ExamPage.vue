@@ -208,11 +208,10 @@ export default {
           clearInterval(countdown)
           this.timeLeft = 'Waktu sudah habis!'
           this.$emit('times-up')
-          localStorage.removeItem('countdownStartTime') // Hapus waktu yang tersimpan setelah selesai
+          localStorage.removeItem('countdownStartTime')
         }
       }, 1000)
 
-      // Simpan waktu mulai countdown ke localStorage saat countdown dimulai
       localStorage.setItem(
         'countdownStartTime',
         Date.now() + timeInSeconds * 1000
