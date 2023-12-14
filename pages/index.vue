@@ -25,6 +25,7 @@
       <component
         @showContent="updateContent"
         :tryouts="tryouts"
+        :premiumlist="premiumList"
         @dashboard-mounted="updateTransition"
         @tryout-mounted="updateTransition"
         @profile-mounted="updateTransition"
@@ -63,6 +64,7 @@ export default {
   },
   data() {
     return {
+      premiumList: [],
       userbackpack: '',
       userphone: '',
       usercity: '',
@@ -131,6 +133,20 @@ export default {
       })
       this.tryouts = formattedTryouts
     },
+    async getPremiumList() {
+      let { data, error } = await this.$supabase
+        .from('premium-list')
+        .select('*')
+      const formattedTryouts = data.map((item) => {
+        return {
+          title: item.title,
+          date: item.date,
+          type: item.type,
+          url: item.url,
+        }
+      })
+      this.premiumList = formattedTryouts
+    },
     handleProfile() {
       this.currentContent = 'TheProfile'
     },
@@ -144,6 +160,7 @@ export default {
   async mounted() {
     await this.fetchUser()
     await this.getTryoutList()
+    await this.getPremiumList()
     await this.fetchBalance()
   },
   computed: {
