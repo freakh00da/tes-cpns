@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  middleware: 'tryout',
+  // middleware: 'tryout',
   data() {
     return { showSucceed: false, timesup: false }
   },

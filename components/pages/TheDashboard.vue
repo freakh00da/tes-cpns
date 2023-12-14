@@ -45,19 +45,32 @@
           >
             <h1 class="mb-2">Contact Us</h1>
             <h2>
-              Grup Diskusi Telegram :
+              Whatsapp :
               <a
                 class="text-blue-500 underline"
-                href="https://t.me/JagoCpnsTryout"
-                >telegram group</a
+                href="https://wa.me/6289637150274"
+                >admin</a
               >
             </h2>
             <h2>
               Informasi & Aduan :
-              <a class="text-blue-500 underline" href="https://t.me/jagocpnsto"
+              <a class="text-blue-500 underline" href="https://t.me/jagocpn"
                 >telegram channel</a
               >
             </h2>
+          </div>
+
+          <div
+            class="mt-8 lg:ml-4 sm:mt-12 p-4 border-2 rounded-xl font-medium text-gray-500 text-center"
+          >
+            <h1 class="mb-2 text-lg">Total Saldo</h1>
+            <h1 class="text-5xl">Rp {{ balance }}</h1>
+            <button
+              @click="handleTopup"
+              class="p-2 bg-blue-500 rounded shadow mt-4 text-xs text-white hover:bg-blue-400"
+            >
+              Tambah Saldo
+            </button>
           </div>
         </div>
       </div>
@@ -78,14 +91,22 @@ export default {
       tryoutCount: 0,
     }
   },
+  props: { balance: Number },
   methods: {
+    handleTopup() {
+      this.$emit('showContent', 'TheTopup')
+    },
     async countUsers() {
-      let { data, error } = await this.$supabase.from('users').select('name')
+      let { count, error } = await this.$supabase
+        .from('users')
+        .select('name', { count: 'exact', head: true })
+
       if (error) {
         console.error('Error fetching counter:', error)
         return null
       }
-      const totalUser = data.length
+
+      const totalUser = count
       this.userCount = totalUser + 543
     },
     async countTryout() {

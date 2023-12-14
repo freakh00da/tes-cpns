@@ -206,6 +206,7 @@ export default {
         } else {
           localStorage.setItem('user', data.session.user.aud)
           localStorage.setItem('user_id', data.user.id)
+          localStorage.setItem('email', data.user.email)
           this.$router.push('/')
         }
       } catch (error) {

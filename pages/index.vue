@@ -23,16 +23,19 @@
       }"
     >
       <component
+        @showContent="updateContent"
         :tryouts="tryouts"
         @dashboard-mounted="updateTransition"
         @tryout-mounted="updateTransition"
         @profile-mounted="updateTransition"
         @rank-mounted="updateTransition"
         @score-mounted="updateTransition"
+        :userbackpack="userbackpack"
         :usercity="usercity"
         :userphone="userphone"
         :username="username"
         :useremail="useremail"
+        :balance="balance"
         :is="currentContent"
       />
     </div>
@@ -46,6 +49,7 @@ import TheTryout from '~/components/pages/TheTryout.vue'
 import TheRank from '~/components/pages/TheRank.vue'
 import TheProfile from '~/components/pages/TheProfile.vue'
 import TheScore from '~/components/pages/TheScore.vue'
+import TheTopup from '~/components/pages/TheTopup.vue'
 
 export default {
   middleware: 'auth',
@@ -55,9 +59,11 @@ export default {
     TheRank,
     TheScore,
     TheProfile,
+    TheTopup,
   },
   data() {
     return {
+      userbackpack: '',
       userphone: '',
       usercity: '',
       username: '',
@@ -66,6 +72,7 @@ export default {
       currentContent: 'TheDashboard',
       showContent: false,
       tryouts: [],
+      balance: 0,
     }
   },
   methods: {
@@ -92,7 +99,26 @@ export default {
       this.userphone = data.phone
       this.username = data.name
       this.useremail = data.email
+      this.userbackpack = data.backpack
     },
+    async fetchBalance() {
+      try {
+        let { data, error } = await this.$supabase
+          .from('user_balance')
+          .select('balance')
+          .eq('email', this.useremail)
+          .single()
+
+        if (error) {
+          this.balance = 0
+        } else {
+          this.balance = data.balance
+        }
+      } catch (err) {
+        console.error('Terjadi kesalahan saat mengambil saldo:', err)
+      }
+    },
+
     async getTryoutList() {
       let { data, error } = await this.$supabase.from('tryout-list').select('*')
       const formattedTryouts = data.map((item) => {
@@ -118,6 +144,7 @@ export default {
   async mounted() {
     await this.fetchUser()
     await this.getTryoutList()
+    await this.fetchBalance()
   },
   computed: {
     titleContent() {
@@ -135,6 +162,9 @@ export default {
       }
       if (this.currentContent === 'TheProfile') {
         return 'Profile'
+      }
+      if (this.currentContent === 'TheTopup') {
+        return 'Topup'
       }
       return 'Dashboard'
     },
