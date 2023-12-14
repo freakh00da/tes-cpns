@@ -65,8 +65,8 @@
         </div>
         <the-divider :title="'Premium'" />
         <div
-          v-if="!premiumList"
-          class="my-20 p-4 w-fit mx-auto border border-black"
+          v-if="premiumList.length === 0"
+          class="mt-20 p-4 w-fit mx-auto border border-black"
         >
           <h1 class="text-lg text-center">
             Anda belum memiliki paket tryout premium
