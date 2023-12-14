@@ -11,6 +11,12 @@
         <div class="lg:flex flex-col w-full justify-start">
           <div class="m-4 p-4 border border-black">
             <h1 class="text-2xl font-semibold">Informasi tryout</h1>
+            <p class="text-red-500">
+              <strong
+                >Dikarenakan pembaruan sistem,silahkan logout dan login ulang
+                sebelum melakukan transaksi apapun!</strong
+              >
+            </p>
             <p>
               Tryout premium akan muncul setelah anda membeli paket tryout yang
               tersedia
