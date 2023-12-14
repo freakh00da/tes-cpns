@@ -7,6 +7,11 @@
       :title="'Konfirmasi pembelian!'"
       :description="`Anda akan membeli paket tryout ini dengan harga : ${price}`"
     />
+    <error-alert
+      v-if="errorAlert"
+      :title="'Error'"
+      :description="'Saldo tidak cukup,silahkan topup terlebih dahulu!'"
+    />
     <header class="flex justify-between border-b border-black h-20">
       <h1 class="text-2xl m-2 md:m-6 font-medium">saldo: Rp {{ balance }}</h1>
       <button
@@ -170,6 +175,7 @@
 export default {
   data() {
     return {
+      errorAlert: false,
       suceed: false,
       singleAlert: false,
       email: localStorage.getItem('email'),
@@ -335,6 +341,11 @@ export default {
 
         console.log('Purchase successful')
       } else {
+        this.errorAlert = true
+        setTimeout(() => {
+          this.errorAlert = false
+        }, 3000)
+        this.singleAlert = false
         console.error('Insufficient balance')
       }
     },
