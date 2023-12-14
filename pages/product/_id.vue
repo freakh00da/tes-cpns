@@ -213,7 +213,9 @@ export default {
     },
     getDiscount() {
       if (this.selectedOption === '5') {
-        this.price = (this.price * 5) / 2
+        this.price = 50000
+      } else if (this.selectedOption === '1') {
+        this.price = 20000
       }
     },
     updateTotalItem() {
