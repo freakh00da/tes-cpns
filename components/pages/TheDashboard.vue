@@ -48,7 +48,7 @@
               Whatsapp :
               <a
                 class="text-blue-500 underline"
-                href="https://wa.me/6289637150274"
+                href="https://wa.me/6285174176676"
                 >admin</a
               >
             </h2>
@@ -64,7 +64,7 @@
             class="mt-8 lg:ml-4 sm:mt-12 p-4 border-2 rounded-xl font-medium text-gray-500 text-center"
           >
             <h1 class="mb-2 text-lg">Total Saldo</h1>
-            <h1 class="text-5xl">Rp {{ balance }}</h1>
+            <h1 class="text-5xl">{{ convertedRupiah }}</h1>
             <button
               @click="handleTopup"
               class="p-2 bg-blue-500 rounded shadow mt-4 text-xs text-white hover:bg-blue-400"
@@ -92,6 +92,18 @@ export default {
     }
   },
   props: { balance: Number },
+  computed: {
+    convertedRupiah() {
+      const angka = this.balance
+      const formatter = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+      })
+      return formatter.format(angka)
+    },
+  },
+
   methods: {
     handleTopup() {
       this.$emit('showContent', 'TheTopup')

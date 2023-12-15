@@ -15,7 +15,7 @@
 
       <h3 class="mt-4 text-lg font-medium text-gray-900">{{ title }}</h3>
 
-      <p class="mt-1.5 text-sm text-gray-700">Rp {{ price }}</p>
+      <p class="mt-1.5 text-sm text-gray-700">{{ price }}</p>
 
       <button
         class="mt-4 block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"

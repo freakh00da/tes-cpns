@@ -13,7 +13,9 @@
       :description="'Saldo tidak cukup,silahkan topup terlebih dahulu!'"
     />
     <header class="flex justify-between border-b border-black h-20">
-      <h1 class="text-2xl m-2 md:m-6 font-medium">saldo: Rp {{ balance }}</h1>
+      <h1 class="text-2xl m-2 md:m-6 font-medium">
+        saldo:{{ convertedBalance }}
+      </h1>
       <button
         @click="$router.push('/')"
         class="w-8 h-8 m-6 hover:text-gray-700"
@@ -148,9 +150,9 @@
               </div>
             </div>
             <div class="flex">
-              <span class="title-font font-medium text-2xl text-gray-900"
-                >Rp {{ price }}</span
-              >
+              <span class="title-font font-medium text-2xl text-gray-900">{{
+                convertedRupiah
+              }}</span>
               <button
                 @click="showModal"
                 class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
@@ -181,7 +183,7 @@ export default {
       email: localStorage.getItem('email'),
       title: '',
       description: '',
-      price: '',
+      price: 0,
       selectedOption: '1',
       totalItem: 1,
       searchQuery: '',
@@ -199,6 +201,24 @@ export default {
       return this.suggestions.filter((suggestion) =>
         suggestion.toLowerCase().includes(this.searchQuery.toLowerCase())
       )
+    },
+    convertedRupiah() {
+      const angka = this.price
+      const formatter = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+      })
+      return formatter.format(angka)
+    },
+    convertedBalance() {
+      const angka = this.balance
+      const formatter = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+      })
+      return formatter.format(angka)
     },
   },
   methods: {
