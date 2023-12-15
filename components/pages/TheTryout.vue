@@ -71,7 +71,7 @@
         </div>
         <the-divider :title="'Premium'" />
         <div
-          v-if="premiumList.length === 0"
+          v-if="!premiumList"
           class="mt-20 p-4 w-fit mx-auto border border-black"
         >
           <h1 class="text-lg text-center">
@@ -129,7 +129,7 @@
                 v-for="(item, index) in catalogueItems"
                 :key="index"
                 :title="item.title"
-                :price="item.price"
+                :price="convertToRupiah(item.price)"
                 :url="item.url"
               />
             </div>
@@ -162,6 +162,14 @@ export default {
     userbackpack: Array,
   },
   methods: {
+    convertToRupiah(angka) {
+      const formattedNumber = angka.toLocaleString('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+      })
+      return formattedNumber
+    },
     filterCatalogueByURL(urls) {
       return this.catalogueItems.filter((item) => urls.includes(item.url))
     },

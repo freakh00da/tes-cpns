@@ -45,8 +45,14 @@
             <h1>Nama : {{ confirmName }}</h1>
             <h1>
               Total Pembayaran :
-              <strong class="font-semibold">Rp {{ confirmAmount }}</strong>
+              <strong class="font-semibold">{{ convertedConfirm }}</strong>
             </h1>
+            <p class="text-sm text-red-500">
+              <strong
+                >"Mohon untuk melakukan pembayaran sesuai dengan jumlah kode
+                unik yang tertera."</strong
+              >
+            </p>
           </div>
 
           <div class="m-2 font-medium">
@@ -89,7 +95,7 @@
             >Telegram</a
           >
           atau
-          <a href="https://wa.me/6289637150274" class="text-blue-500 underline"
+          <a href="https://wa.me/6285174176676" class="text-blue-500 underline"
             >Whatsapp</a
           >
         </p>
@@ -120,7 +126,7 @@
                 Jumlah Topup x Rp 10.000
               </span>
             </label>
-            <span class="ml-1 text-xs lg:text-lg">Rp {{ amount * 10000 }}</span>
+            <span class="ml-1 text-xs lg:text-lg">{{ convertedRupiah }}</span>
           </div>
           <div class="flex items-center mt-6">
             <label
@@ -152,7 +158,7 @@
               'bg-blue-200': !name || !amount,
             }"
           >
-            Kirim Permintaan
+            Buat Pesanan
           </button>
         </form>
       </div>
@@ -160,7 +166,7 @@
         <h1 class="text-lg font-medium my-2">Detail Order</h1>
         <p>Nama: {{ name }}</p>
         <p>
-          Total Topup: <strong>Rp {{ amount * 10000 }}</strong>
+          Total Topup: <strong>{{ convertedRupiah }}</strong>
         </p>
       </div>
       <div class="h-fit border border-black mt-6 lg:mt-20 mx-4 p-4 mb-10">
@@ -176,7 +182,7 @@
             >Telegram</a
           >
           atau
-          <a href="https://wa.me/6289637150274" class="text-blue-500 underline"
+          <a href="https://wa.me/6285174176676" class="text-blue-500 underline"
             >Whatsapp</a
           >
         </p>
@@ -200,6 +206,26 @@ export default {
   },
   props: {
     useremail: String,
+  },
+  computed: {
+    convertedRupiah() {
+      const angka = this.amount * 10000 // Ganti dengan angka yang ingin Anda konversi
+      const formattedNumber = angka.toLocaleString('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+      })
+      return formattedNumber
+    },
+    convertedConfirm() {
+      const angka = this.confirmAmount
+      const formattedNumber = angka.toLocaleString('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+      })
+      return formattedNumber
+    },
   },
   methods: {
     openModal() {
